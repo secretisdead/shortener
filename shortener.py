@@ -11,4 +11,4 @@ shortener = Blueprint(
 def check(short):
 	if not hasattr(g, 'shortener_config') or short not in g.shortener_config:
 		abort(404)
-	return redirect(shortener_config[short], 302)
+	return redirect(g.shortener_config[short], 302)
