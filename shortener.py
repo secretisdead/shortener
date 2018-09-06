@@ -5,8 +5,6 @@ shortener = Blueprint(
 	__name__,
 )
 
-from regex_converter import RegexConverter
-
 @shortener.route('/' + "<regex('([a-zA-Z0-9_\-\/]+)'):short>")
 def check(short):
 	import json
