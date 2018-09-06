@@ -3,9 +3,6 @@ from flask import Blueprint, abort, redirect
 shortener = Blueprint(
 	'shortener',
 	__name__,
-	template_folder='templates',
-	static_folder='static',
-	static_url_path='/static'
 )
 
 from regex_converter import RegexConverter
