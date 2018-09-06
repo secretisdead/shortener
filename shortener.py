@@ -1,6 +1,6 @@
 import json
 
-from flask import Blueprint, abort, redirect
+from flask import Blueprint, abort, g, redirect
 
 shortener = Blueprint(
 	'shortener',
@@ -9,16 +9,6 @@ shortener = Blueprint(
 
 @shortener.route('/' + "<regex('([a-zA-Z0-9_\-\/]+)'):short>")
 def check(short):
-	try:
-		f = open('shortener_config.json', 'r')
-	except FileNotFoundError:
-		abort(500, 'missing_shortener_config_file')
-
-	try:
-		shortener_config = json.load(f)
-	except json.decoder.JSONDecodeError:
-		abort(500, 'malformed_shortener_config')
-
-	if short not in shortener_config:
+	if not hasattr(g, 'shortener_config') or short not in g.shortener_config:
 		abort(404)
 	return redirect(shortener_config[short], 302)
