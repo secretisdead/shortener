@@ -7,8 +7,6 @@ shortener = Blueprint(
 	__name__,
 )
 
-shortener.record_once(add_regex_converter)
-
 @shortener.route('/<short>')
 def check(short):
 	if not hasattr(g, 'shortener_config') or short not in g.shortener_config:
